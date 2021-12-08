@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+//New stuff
+
 Game::Game():
 	m_tank(m_tankController)
 {

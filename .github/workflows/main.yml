@@ -1,0 +1,76 @@
+# This workflow sets up and runs MSBuild and VSTest 
+# to build and test a Visual Studio solution.
+#
+
+name: Build and Test
+
+on: 
+  push:
+    branches:
+    - master
+  workflow_dispatch:
+    
+jobs:
+  run-msbuild-vstest:
+    runs-on: windows-latest
+    name: Run MSBuild and VSTest
+    env:
+      SFML_SDK: 'C:\Program Files (x86)\SFML' # this is where sfml is installed to
+
+    steps:
+    - name: Cache SFML Build
+      id: cache-sfml
+      uses: actions/cache@v2.1.3
+      with:
+        path: C:\Program Files (x86)\SFML
+        key: sfml
+
+    - name: Build SFML
+      if: steps.cache-sfml.outputs.cache-hit != 'true'
+      shell: bash
+      run: |
+          set -e #Exit immediately if a command exits with a non-zero status.
+          git clone https://github.com/SFML/SFML --depth 1
+          pushd SFML
+            #cmake -B build -DSFML_USE_STATIC_STD_LIBS=TRUE -DBUILD_SHARED_LIBS=FALSE #For static link lib
+            cmake -B build -DSFML_USE_STATIC_STD_LIBS=FALSE -DBUILD_SHARED_LIBS=TRUE -A Win32 
+            #cmake --build build --config Release
+            cmake --build build --config Debug
+            #cmake --install build --config Release
+            cmake --install build --config Debug
+          popd
+          rm -rf SFML
+          
+    # for action debuging only
+    - name: check SFML
+      shell: bash
+      run: |
+        ls "$SFML_SDK"
+        ls "$SFML_SDK"/lib
+        
+    - name: Checkout code
+      uses: actions/checkout@v2.1.0
+      id: checkout_code
+
+    - name: Setup MSBuild and add to PATH
+      uses: microsoft/setup-msbuild@v1.1
+      id: setup_msbuild
+      
+    - name: Restore nuget packages
+      run: nuget restore
+
+    - name: Run MSBuild
+      id: run_msbuild
+      run: msbuild /p:Configuration=Debug /p:Platform=x86
+
+    - name: Setup VSTest and add to PATH
+      uses: darenm/Setup-VSTest@v1
+      id: setup_vstest
+
+    - name: Run VSTest
+      id: run_vstest
+      run: |
+        $testExe=@(gci Debug\*[Tt]est*.exe)[0].Name
+        $GTAdir=@(gci packages/GoogleTestAdapter*)[0].Name # find GoogleTestAdapter
+        vstest.console.exe /Platform:x86 .\Debug\$testExe /TestAdapterPath:.\packages\$GTAdir\build\_common\
+      shell: pwsh

@@ -1,4 +1,4 @@
-[![Build and Test](https://github.com/KenPowerClassroom/TankGame/actions/workflows/main.yml/badge.svg)](https://github.com/KenPowerClassroom/TankGame/actions/workflows/main.yml)
+[![Build and Test](https://github.com/KenPowerClassroom/arcadegame2021_22-arcade2021d/actions/workflows/main.yml/badge.svg)](https://github.com/KenPowerClassroom/arcadegame2021_22-arcade2021d/actions/workflows/main.yml)
 
 # TankGame
 

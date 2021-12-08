@@ -21,3 +21,14 @@ on the map, enemies and player could shoot the bullet to destroy the walls.
 
 10 lives for player, when enemies' bullets hit the player, they will lose 1 life and replace the tank to the start point. When enemy 
 hits the base, player got lost.
+
+# MVP
+
+The player will be able to move around the map and fire bullets aswell as collide with walls. The walls will break if hit with a bullet. The health will be displayed to the player.
+
+# Out of scope
+
+AI of enemy,
+Fancy graphics,
+Unbreakable walls,
+Player animations.

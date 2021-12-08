@@ -11,7 +11,7 @@ class TankController{
 public:
 
 	TankController():
-		m_maximumSpeed(580),
+		m_maximumSpeed(100),
 		m_rotation(Angle::fromDegrees(0)),
 		m_speed(0),
 		m_xpos(0), m_ypos(0)

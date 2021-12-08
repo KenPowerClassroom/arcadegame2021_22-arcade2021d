@@ -3,11 +3,19 @@
 
 #include <iostream>
 
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <sstream>
+#include <fstream>
+
 //New stuff
 
 Game::Game():
 	m_tank(m_tankController)
 {
+
 	//loading the level data from the YAML file corresponding
 	int currentLevel = 1;
 	try
@@ -22,7 +30,7 @@ Game::Game():
 	}
 	
 	m_bgTexture.load(m_level.m_background.m_fileName);
-	background.init(m_bgTexture);
+	background.init(m_bgTexture, sf::Vector2f(8, 8));
 	
 	m_spriteSheetTexture.load("./resources/images/SpriteSheet.png");
 	walls.init(m_spriteSheetTexture, m_level.m_obstacles);

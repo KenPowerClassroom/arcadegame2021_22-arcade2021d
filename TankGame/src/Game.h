@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "Background.h"
 #include "Window.h"
+#include "Laser.h"
 /// Example usage:
 ///		Game game;
 ///		game.run();
@@ -57,6 +58,8 @@ protected:
 	Window window;
 	// Load the game level data.
 	LevelData m_level;
+
+	Lasers lasers;
 
 	//background texture 
 	Texture m_bgTexture;

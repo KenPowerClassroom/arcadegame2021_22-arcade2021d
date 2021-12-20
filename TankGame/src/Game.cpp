@@ -64,6 +64,9 @@ void Game::handleInput()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		m_tankController.decreaseRotation();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	lasers.makeLaser(sf::Vector2f(m_tank.controller.getXpos(), m_tank.controller.getYpos()), m_tank.controller.getRotationDegrees(), 5);
 }
 
 void Game::update(double dt)
@@ -71,6 +74,7 @@ void Game::update(double dt)
 	window.processEvents();
 	handleInput();
 	m_tankController.update(dt);
+	lasers.update();
 }
 
 void Game::render()
@@ -79,6 +83,7 @@ void Game::render()
 	
 	window.drawSprites(background.getSprites());
 	window.drawSprites(walls.getSprites()) ;
+	lasers.draw(window.getWindow());
 	window.drawSprites(m_tank.getSprites()) ;
 
 	window.endFrame(); 

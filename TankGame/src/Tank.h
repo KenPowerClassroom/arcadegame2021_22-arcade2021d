@@ -9,8 +9,8 @@ class Tank: public SpriteEntity
 public:	
 	Tank(TankController& tc);
 	void init(Texture& texture);
-private:
 	TankController& controller;
+private:
 	void update();
 };
 

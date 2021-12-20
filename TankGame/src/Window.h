@@ -22,6 +22,8 @@ public:
 		m_window.setSize(sf::Vector2u(ScreenSize::s_width * 3, ScreenSize::s_height * 3));
 	};
 
+	sf::RenderWindow& getWindow() {return m_window;}
+
 	void startFrame() {
 		m_window.clear(sf::Color(82, 82, 82, 255));
 	}

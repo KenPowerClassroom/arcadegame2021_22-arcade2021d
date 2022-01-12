@@ -13,10 +13,12 @@ public:
 
 		while (game.isRunning())
 		{
+
 			sf::Time dt = clock.restart();
 
-			while (clock.getElapsedTime().asMilliseconds() < MS_PER_UPDATE)
-				;
+			while (clock.getElapsedTime().asMilliseconds() < MS_PER_UPDATE);
+
+			game.handleInput();
 
 			game.update(clock.getElapsedTime().asMilliseconds());
 

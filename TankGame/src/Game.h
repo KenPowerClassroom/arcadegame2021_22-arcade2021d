@@ -6,6 +6,8 @@
 #include "Background.h"
 #include "Window.h"
 #include "Laser.h"
+
+#include <Windows.h>
 //#include <SFML/Graphics.hpp>
 /// Example usage:
 ///		Game game;

@@ -37,4 +37,17 @@ int main(int, char* argv[])
 
 	Game game;
 	game.run();
+
+	/*INPUT typeEnter;
+	typeEnter.type = INPUT_KEYBOARD;
+	typeEnter.ki.wScan = 0;
+	typeEnter.ki.time = 0;
+	typeEnter.ki.dwExtraInfo = 0;
+
+	typeEnter.ki.wVk = 32;
+	typeEnter.ki.dwFlags = 0;
+	SendInput(1, &typeEnter, sizeof(INPUT));*/
+
+
+	return 0;
 }

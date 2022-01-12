@@ -73,7 +73,7 @@ void Game::handleInput()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		m_tankController.increaseSpeed();
-			
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		m_tankController.decreaseSpeed();
 
@@ -83,20 +83,33 @@ void Game::handleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		m_tankController.decreaseRotation();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	lasers.makeLaser(sf::Vector2f(m_tank.controller.getXpos(), m_tank.controller.getYpos()), m_tank.controller.getRotationDegrees(), 5);
-
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	sf::Event newEvent;
+	while (window.getWindow().pollEvent(newEvent))
 	{
-		//sf::Vector2f position = sf::Mouse::getPosition(window);
-		spawnInEnemy(1, sf::Vector2f(sf::Mouse::getPosition(window.getWindow())));
+		if (sf::Event::Closed == newEvent.type)
+		{
+			window.getWindow().close();
+		}
+		if (sf::Event::KeyPressed == newEvent.type)
+		{
+			if (sf::Keyboard::Space == newEvent.key.code)
+				lasers.makeLaser(sf::Vector2f(m_tank.controller.getXpos(), m_tank.controller.getYpos()), m_tank.controller.getRotationDegrees(), 5);
+			if (sf::Keyboard::Escape == newEvent.key.code)
+				window.getWindow().close();
+			if(sf::Keyboard::O == newEvent.key.code) // opens the project url!
+				ShellExecute(0, 0, L"https://github.com/KenPowerClassroom/arcadegame2021_22-arcade2021d", 0, 0, SW_SHOW);
+		}
+		if (sf::Event::MouseButtonReleased == newEvent.type)
+		{
+			//sf::Vector2f position = sf::Mouse::getPosition(window);
+			spawnInEnemy(1, sf::Vector2f(sf::Mouse::getPosition(window.getWindow()).x / window.getScale(), sf::Mouse::getPosition(window.getWindow()).y / window.getScale()));
+		}
 	}
 }
 
 void Game::update(double dt)
 {
 	window.processEvents();
-	handleInput();
 	m_tankController.update(dt);
 	for (int i = 0; i < noOfEnemies; i++)
 	{

@@ -6,8 +6,9 @@ class Window {
 	// main window
 	sf::RenderWindow m_window;
 	int buttoncount{ 0 };
-public:
 	int scale = 3;
+public:
+	int getScale() { return scale; }
 	Window() : m_window(
 		sf::VideoMode(ScreenSize::s_width, ScreenSize::s_height, 32),
 		"SFML Playground",
@@ -32,22 +33,27 @@ public:
 		if (m_window.getSize().x == ScreenSize::s_width)
 		{
 			m_window.setSize(sf::Vector2u(ScreenSize::s_width * 2, ScreenSize::s_height * 2));
+			scale = 2;
 		}
 		else if (m_window.getSize().x == ScreenSize::s_width * 2)
 		{
 			m_window.setSize(sf::Vector2u(ScreenSize::s_width * 3, ScreenSize::s_height * 3));
+			scale = 3;
 		}
 		else if (m_window.getSize().x == ScreenSize::s_width * 3)
 		{
 			m_window.setSize(sf::Vector2u(ScreenSize::s_width * 4, ScreenSize::s_height * 4));
+			scale = 4;
 		}
 		else if (m_window.getSize().x == ScreenSize::s_width * 4)
 		{
 			m_window.setSize(sf::Vector2u(ScreenSize::s_width * 5, ScreenSize::s_height * 5));
+			scale = 5;
 		}
 		else
 		{
 			m_window.setSize(sf::Vector2u(ScreenSize::s_width, ScreenSize::s_height));
+			scale = 1;
 		}
 	}
 

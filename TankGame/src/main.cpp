@@ -19,6 +19,7 @@
 
 
 #include "Game.h"
+#include "Intro.h"
 
 /// <summary>
 /// @brief starting point for all C++ programs.
@@ -30,6 +31,10 @@
 /// <returns></returns>
 int main(int, char* argv[])
 {
+	Intro* op = new Intro;
+	op->playIntro();
+	delete op;
+
 	Game game;
 	game.run();
 }

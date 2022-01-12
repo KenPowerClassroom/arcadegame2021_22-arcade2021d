@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="src\Angle.h" />
     <ClInclude Include="src\Background.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="src\Angle.cpp" />
     <ClCompile Include="src\Game.cpp" />

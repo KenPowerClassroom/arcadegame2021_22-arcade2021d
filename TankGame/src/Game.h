@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "Window.h"
 #include "Laser.h"
+//#include <SFML/Graphics.hpp>
 /// Example usage:
 ///		Game game;
 ///		game.run();
@@ -55,6 +56,8 @@ public:
 
 protected:
 
+	void spawnInEnemy(int t_amount, sf::Vector2f t_pos);
+
 	Window window;
 	// Load the game level data.
 	LevelData m_level;
@@ -69,7 +72,11 @@ protected:
 	Walls walls;
 	Background background;
 	Tank m_tank;
-	
-	//Control tank movement
 	TankController m_tankController;
+
+	std::vector <Tank> m_enemyTanks;
+	std::vector <TankController> m_enemyTankController;
+	int noOfEnemies{ 0 };
+
+	//Control tank movement
 };

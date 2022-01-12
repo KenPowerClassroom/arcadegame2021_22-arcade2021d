@@ -7,6 +7,7 @@ class Window {
 	sf::RenderWindow m_window;
 	int buttoncount{ 0 };
 public:
+	int scale = 3;
 	Window() : m_window(
 		sf::VideoMode(ScreenSize::s_width, ScreenSize::s_height, 32),
 		"SFML Playground",

@@ -31,9 +31,9 @@
 /// <returns></returns>
 int main(int, char* argv[])
 {
-	Intro* op = new Intro;
+	/*Intro* op = new Intro;
 	op->playIntro();
-	delete op;
+	delete op;*/
 
 	Game game;
 	game.run();

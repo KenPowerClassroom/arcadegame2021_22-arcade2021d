@@ -44,6 +44,24 @@ bool Game::isRunning() {
 	return window.isOpen();
 }
 
+void Game::spawnInEnemy(int t_amount, sf::Vector2f t_pos)
+{
+	for (int i = 0; i < t_amount; i++)
+	{
+		TankController tempController;
+		tempController.setPos(t_pos.x, t_pos.y);
+		m_enemyTankController.push_back(tempController);
+		//noOfEnemies++;
+
+		Tank tempTank(m_enemyTankController.back());
+		tempTank.init(m_spriteSheetTexture);
+		m_enemyTanks.push_back(tempTank); 
+
+		noOfEnemies++;
+
+	}
+}
+
 void Game::run()
 {
 	//Servant pattern https://en.wikipedia.org/wiki/Servant_(design_pattern)#Similar_design_pattern:_Command
@@ -67,6 +85,12 @@ void Game::handleInput()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	lasers.makeLaser(sf::Vector2f(m_tank.controller.getXpos(), m_tank.controller.getYpos()), m_tank.controller.getRotationDegrees(), 5);
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		//sf::Vector2f position = sf::Mouse::getPosition(window);
+		spawnInEnemy(1, sf::Vector2f(sf::Mouse::getPosition(window.getWindow())));
+	}
 }
 
 void Game::update(double dt)
@@ -74,6 +98,10 @@ void Game::update(double dt)
 	window.processEvents();
 	handleInput();
 	m_tankController.update(dt);
+	for (int i = 0; i < noOfEnemies; i++)
+	{
+		m_enemyTankController[i].update(dt);
+	}
 	lasers.update();
 }
 
@@ -84,6 +112,10 @@ void Game::render()
 	window.drawSprites(background.getSprites());
 	window.drawSprites(walls.getSprites()) ;
 	lasers.draw(window.getWindow());
+	for (int i = 0; i < noOfEnemies; i++)
+	{
+		window.drawSprites(m_enemyTanks[i].getSprites());
+	}
 	window.drawSprites(m_tank.getSprites()) ;
 
 	window.endFrame(); 

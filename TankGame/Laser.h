@@ -4,6 +4,8 @@
 #include <math.h>
 #include <iostream>
 #include <SFML/Audio.hpp>
+#include "src/Tank.h"
+
 class Laser
 {
 
@@ -34,7 +36,8 @@ public:
 	Lasers() {};
 	void draw(sf::RenderWindow& t_window);
 	void makeLaser(sf::Vector2f t_loc, int t_rot, int t_speed);
-	void update();
+	//void update(Tank& t_tank);
+	void update(std::vector<Tank>& t_tanks, int& t_noOfEnemies);
 	bool checkIfCollision(sf::Vector2f t_loc, int t_tolerence);
 	void checkWallCollison(sf::Sprite t_wallSprite);
 private:

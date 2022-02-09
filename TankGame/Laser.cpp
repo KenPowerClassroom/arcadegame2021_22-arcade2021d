@@ -40,7 +40,7 @@ void Lasers::makeLaser(sf::Vector2f t_loc, int t_rot, int t_speed)
 			{
 				laserVector[step].shoot(t_loc, t_rot, t_speed);
 				spawnedIn = true;
-				break;
+				//break;
 			}
 		}
 	}
@@ -70,7 +70,7 @@ void Laser::shoot(sf::Vector2f t_location, int t_loc, int t_speed)
 	}
 }
 
-void Lasers::update()
+void Lasers::update(std::vector<Tank>& t_tanks, int& t_noOfEnemies)
 {
 	for (int step = 0; step < m_noOfLasers; step++)
 	{
@@ -78,6 +78,19 @@ void Lasers::update()
 		{
 			laserVector[step].moveLaser();
 			laserVector[step].checkLaser();
+			// check collision between laser and tank
+			if (t_tanks.size() > 0)
+			{
+				//if (laserVector[step].getSprite().getGlobalBounds().intersects(t_tanks.back().getSprite().getGlobalBounds()));
+				if (t_tanks.back().getSprite().getGlobalBounds().contains(laserVector[step].getSprite().getPosition()))
+				{
+					laserVector[step].kill();
+					t_tanks.clear();
+					t_noOfEnemies = 0;
+					//std::cout << "hit\n";
+					//std::cout << t_tanks.back().getSprite().getGlobalBounds().left << "\n";
+				}
+			}
 		}
 	}
 }

@@ -111,7 +111,13 @@ void Game::update(double dt)
 	{
 		m_enemyTankController[i].update(dt);
 	}
-	lasers.update();
+	/*
+	if (m_enemyTanks.size() > 0)
+	{
+		lasers.update(m_enemyTanks.back());
+	}
+	*/
+	lasers.update(m_enemyTanks, noOfEnemies);
 }
 
 void Game::render()

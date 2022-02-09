@@ -10,6 +10,7 @@ public:
 	Tank(TankController& tc);
 	void init(Texture& texture);
 	TankController& controller;
+	sf::Sprite getSprite() const { return sprites.back(); }
 private:
 	void update();
 };

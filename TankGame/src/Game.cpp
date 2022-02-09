@@ -52,14 +52,11 @@ void Game::spawnInEnemy(int t_amount, sf::Vector2f t_pos)
 		tempController.setPos(t_pos.x, t_pos.y);
 		m_enemyTankController.push_back(tempController);
 		//noOfEnemies++;
-
 		Tank tempTank(m_enemyTankController.back());
 		tempTank.init(m_spriteSheetTexture);
 		m_enemyTanks.push_back(tempTank); 
-
-		noOfEnemies++;
-
 	}
+	noOfEnemies += t_amount;
 }
 
 void Game::run()
@@ -100,8 +97,7 @@ void Game::handleInput()
 				ShellExecute(0, 0, L"https://github.com/KenPowerClassroom/arcadegame2021_22-arcade2021d", 0, 0, SW_SHOW);
 		}
 		if (sf::Event::MouseButtonReleased == newEvent.type)
-		{
-			//sf::Vector2f position = sf::Mouse::getPosition(window);
+		{ 
 			spawnInEnemy(1, sf::Vector2f(sf::Mouse::getPosition(window.getWindow()).x / window.getScale(), sf::Mouse::getPosition(window.getWindow()).y / window.getScale()));
 		}
 	}
@@ -132,5 +128,4 @@ void Game::render()
 	window.drawSprites(m_tank.getSprites()) ;
 
 	window.endFrame(); 
-
 }

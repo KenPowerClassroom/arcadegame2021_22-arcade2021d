@@ -29,13 +29,21 @@ void TankController::decreaseSpeed()
 		m_speed -= SPEED_INCREASE_PER_FRAME;
 }
 
-Angle ROTATION_ONE_FRAME = Angle::fromDegrees(3);
+Angle ROTATION_ONE_FRAME = Angle::fromDegrees(1);
 void TankController::increaseRotation()
 {
+	if (getRotationDegrees() >= 360.0)
+	{
+		m_rotation = m_rotation - Angle::fromDegrees(360.0);
+	}
 	m_rotation = m_rotation + ROTATION_ONE_FRAME;
 }
 
 void TankController::decreaseRotation()
 {
+	if (getRotationDegrees() <= 0.0)
+	{
+		m_rotation = m_rotation + Angle::fromDegrees(360.0);
+	}
 	m_rotation = m_rotation - ROTATION_ONE_FRAME;
 }

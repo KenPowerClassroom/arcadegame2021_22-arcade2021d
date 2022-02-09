@@ -47,7 +47,7 @@ TEST(TankController, MaxSpeedIsCapped) {
 	tc.update(1000);
 
 	EXPECT_EQ(tc.getYpos(), 0);
-	EXPECT_EQ(tc.getXpos(), 580);
+	EXPECT_EQ(tc.getXpos(), 100);
 }
 
 TEST(TankController, MinSpeedIsCapped) {
@@ -59,7 +59,7 @@ TEST(TankController, MinSpeedIsCapped) {
 	tc.update(1000);
 
 	EXPECT_EQ(tc.getYpos(), 0);
-	EXPECT_EQ(tc.getXpos(), -580);
+	EXPECT_EQ(tc.getXpos(), -100);
 }
 
 TEST(TankController, MoveInNEDirection) {

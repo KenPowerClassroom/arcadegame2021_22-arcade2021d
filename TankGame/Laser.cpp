@@ -1,4 +1,3 @@
-
 #include "Laser.h"
 
 
